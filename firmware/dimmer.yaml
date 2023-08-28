@@ -1,0 +1,21 @@
+output:
+- platform: custom
+  type: float
+  lambda: |-
+    auto my_dev_1 = new MyCustom_AT();
+    App.register_component(my_dev_1);
+    return {my_dev_1};
+  
+  outputs:
+    id: my_dev_1
+
+# Example usage in a light
+light:
+  - platform: monochromatic
+    output: my_dev_1
+    name: "Kitchen Light"
+
+fan:
+  - platform: speed
+    name: "Output Fan"
+    output: my_dev_1
