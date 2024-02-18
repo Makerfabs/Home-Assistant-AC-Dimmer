@@ -20,9 +20,9 @@ Note:
 
 ## Intruduce
 
-Product Link:[]()
+[Product Link](https://www.makerfabs.com/ac-dimmer-for-home-assistant.html)
 
-Wiki Link : []()
+[Wiki Link](https://wiki.makerfabs.com/How_to_use_AC_Dimmer_for_Home_Assistant.html)
 
 
 
