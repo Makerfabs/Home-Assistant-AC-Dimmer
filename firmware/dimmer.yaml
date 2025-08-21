@@ -1,21 +1,73 @@
-output:
-- platform: custom
-  type: float
-  lambda: |-
-    auto my_dev_1 = new MyCustom_AT();
-    App.register_component(my_dev_1);
-    return {my_dev_1};
-  
-  outputs:
-    id: my_dev_1
+esphome:
+  name: dimmeradruino
+  friendly_name: dimmerAdruino
 
-# Example usage in a light
-light:
-  - platform: monochromatic
-    output: my_dev_1
-    name: "Kitchen Light"
+external_components:
+  - source: 
+      type: local
+      path: common_components
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+  level: INFO
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "ID95Wb5V982+bpnhQKAgReCRPJOW1v3NB1KdAHoHel8="
+
+ota:
+  - platform: esphome
+    password: "b7e39ba79c1205fafee50d253dbb0054"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "dimmerAdruino Fallback Hotspot"
+    password: "FC0heLveyPgf"
+
+captive_portal:
+
+
+output:
+  - platform: arduino_dimmer
+    id: arduino_dimmer_1
 
 fan:
   - platform: speed
-    name: "Output Fan"
-    output: my_dev_1
+    name: "Kitchen Lights"
+    output: arduino_dimmer_1
+    icon: "mdi:lightbulb"
+    
+
+
+
+
+sensor:
+  - platform: homeassistant
+    id: Kitchen_light_speed
+    entity_id: fan.dimmeradruino_kitchen_lights
+    attribute: percentage
+    unit_of_measurement: "%"
+    device_class: "power_factor"
+    state_class: "measurement"
+    # on_value:
+    #   - lambda: 'update_brightness_display((int)x);'
+
+binary_sensor:
+  - platform: homeassistant
+    id: kitchen_lights_state
+    entity_id: fan.dimmeradruino_kitchen_lights
+    name: "Kitchen Lights State"
+    # on_state:
+    #   - lambda: 'update_light_state(x);'
+    
+
