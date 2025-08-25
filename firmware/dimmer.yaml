@@ -47,27 +47,3 @@ fan:
     output: arduino_dimmer_1
     icon: "mdi:lightbulb"
     
-
-
-
-
-sensor:
-  - platform: homeassistant
-    id: Kitchen_light_speed
-    entity_id: fan.dimmeradruino_kitchen_lights
-    attribute: percentage
-    unit_of_measurement: "%"
-    device_class: "power_factor"
-    state_class: "measurement"
-    # on_value:
-    #   - lambda: 'update_brightness_display((int)x);'
-
-binary_sensor:
-  - platform: homeassistant
-    id: kitchen_lights_state
-    entity_id: fan.dimmeradruino_kitchen_lights
-    name: "Kitchen Lights State"
-    # on_state:
-    #   - lambda: 'update_light_state(x);'
-    
-
