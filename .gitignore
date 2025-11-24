@@ -1,0 +1,6 @@
+build/
+sdkconfig
+sdkconfig.old
+.venv
+__pycache__/
+.vscode/
